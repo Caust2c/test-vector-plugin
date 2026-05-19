@@ -1,0 +1,10 @@
+{
+  "id": "vectorspace3d",
+  "name": "3D Vector Space",
+  "version": "0.1.0",
+  "description": "Interactive 3D vector visualizer with a dynamic resultant",
+
+  "prompt": "./prompt.md",
+  "schema": "./schema.json",
+  "renderer": "./renderer.js"
+}

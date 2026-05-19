@@ -1,0 +1,94 @@
+{
+  "type": "object",
+
+  "required": [
+    "explanation",
+    "vectorspace"
+  ],
+
+  "properties": {
+    "explanation": {
+      "type": "string"
+    },
+
+    "vectorspace": {
+      "type": "object",
+
+      "required": [
+        "vectors"
+      ],
+
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+
+        "vectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "components"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "components": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "color": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              }
+            }
+          }
+        },
+
+        "resultant": {
+          "type": "object",
+          "required": [
+            "name",
+            "components"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "color": {
+              "type": "string"
+            }
+          }
+        },
+
+        "rotation": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            }
+          }
+        },
+
+        "scale": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
