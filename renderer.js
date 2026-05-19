@@ -93,7 +93,7 @@ function parseLooseSpecification(text) {
     }
 
     if (inVectors || inResultant) {
-      const nameMatch = line.match(/^[-*]\s*name:\s*(.+)$/i);
+      const nameMatch = line.match(/^(?:[-*]\s*)?name:\s*(.+)$/i);
       if (nameMatch) {
         current = { name: nameMatch[1].trim(), components: [0, 0, 0] };
         if (inVectors) {
@@ -453,6 +453,19 @@ function renderVectorControls(container, state, refresh) {
   container.appendChild(summary);
 }
 
+export function canDetectVectorSpace(text) {
+  return text.includes('Vector Specification:') || (text.includes('Vectors:') && text.includes('components:'));
+}
+
+function extractExplanationVectorSpace(text) {
+  const explanationMatch = text.match(/\*\*Explanation:\*\*([\s\S]*?)(?:\*\*Vector Specification:\*\*|Vectors:)/i);
+  if (explanationMatch) {
+    return explanationMatch[1].trim();
+  }
+
+  return text.split('\n\n')[0]?.trim() || '';
+}
+
 export async function renderVectorSpace(data, container) {
   try {
     const parsed = parseVectorSpaceData(data);
@@ -709,8 +722,9 @@ export async function renderVectorSpace(data, container) {
   }
 }
 
-export async function render(data, container) {
-  return renderVectorSpace(data, container);
-}
-
-export default renderVectorSpace;
+// Standard plugin interface
+export const plugin = {
+  canDetect: canDetectVectorSpace,
+  extractExplanation: extractExplanationVectorSpace,
+  render: renderVectorSpace
+};
